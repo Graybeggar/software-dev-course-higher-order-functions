@@ -91,3 +91,44 @@ Step-by-Step:
 // console.log("Uppercased names:", ...);
 // console.log("Discounted products:", ...);
 // console.log("Total value in stock:", ...);
+
+const products = [
+    { name: "Laptop", price: 1000, inStock: true },
+    { name: "Phone", price: 500, inStock: false },
+    { name: "Tablet", price: 800, inStock: true },
+    { name: "Monitor", price: 300, inStock: true },
+    { name: "Keyboard", price: 100, inStock: false },
+  ];
+  
+  //  Task 1: Filter Products by Availability
+  function filterProducts(products, callback) {
+    return products.filter(callback);
+  }
+  
+  const availableProducts = filterProducts(products, product => product.inStock);
+
+  //  Task 2: Transform Product Names
+  const uppercaseNames = products.map(product => product.name.toUpperCase());
+
+  // Task 3: Generate Discounted Prices
+  function applyDiscount(discountPercent) {
+    return function(product) {
+      return {
+        ...product,
+        discountedPrice: product.price * (1 - discountPercent / 100)
+      };
+    };
+  }
+  
+  const discountedProducts = products.map(applyDiscount(50));
+
+  //  Task 4: Calculate Total Inventory Value
+  const totalInventoryValue = products.reduce((total, product) => {
+    return product.inStock ? total + product.price : total;
+  }, 0);
+
+  // 🧪 Console Test Your Work
+console.log("Filtered products:", availableProducts);
+console.log("Uppercased names:", uppercaseNames);
+console.log("Discounted products:", discountedProducts);
+console.log("Total value in stock:", totalInventoryValue);
